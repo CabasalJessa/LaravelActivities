@@ -13,6 +13,13 @@
                     Title : {{ $post->title }} <br>
                     Description : {{ $post->description }} <br>
                     Created At : {{ $post->created_at }} <br>
+                    Post Image: 
+                    @if ($post->img)
+                   
+                        <img src="{{ asset('/storage/img/'.$post->img) }} ">
+                    @else
+                        No image available
+                    @endif
                 </div>
             </div>
         </div>
