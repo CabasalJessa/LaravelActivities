@@ -46,7 +46,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
+ 
+        $request->validate([
+            'title' => 'required|max:100',
+            'description' => 'required'
+        ]);
 
         if($request->hasFile('img')){
 

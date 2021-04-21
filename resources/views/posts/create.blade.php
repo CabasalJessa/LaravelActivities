@@ -8,7 +8,16 @@
                 <div class="card-header">New Post</div>
                 <div class="card-body">
 
-            
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>                                        
+                                @endforeach
+                            </ul>
+                        </div>                        
+                    @endif
+
                      <form method="POST" action="/posts" enctype="multipart/form-data">
                         @csrf
                         
@@ -19,7 +28,11 @@
                                 <input id="title" type="text" class="form-control" name="title" @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required  autofocus>        
                             </div>
 
-                            
+                            @error('title')
+                                <span class="invalid-feedback" role="alert"> 
+                                    {{ $message }}
+                                </span>                                
+                            @enderror
                         </div>
 
                         <div class="form-group row">
@@ -28,7 +41,11 @@
                                 <textarea class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description">
                                 </textarea>    
                             </div>
-                            
+                            @error('description')
+                                <span class="invalid-feedback" role="alert"> 
+                                    {{ $message }}
+                                </span>                            
+                            @enderror
                         </div>
 
                         <div class="form-group row">
