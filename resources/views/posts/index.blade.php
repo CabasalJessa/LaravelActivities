@@ -1,14 +1,20 @@
-  
 @extends('layouts.app')
 
 
 @section('content')
 
 
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            {{-- create a new post --}}
+            
+            @if(session('message'))
+              <div class="alert alert-success">
+                    {{ session('message') }}
+              </div>
+            @endif
+
             <a class="btn button btn-info" href="/posts/create">Create New</a>
             <br><br>
             <div class="card">       
@@ -31,17 +37,18 @@
                                     <td> <a  href="/posts/{{$post->id}}" class="btn btn-info"> View </a> </td>
                                     <td> <a  href="/posts/{{$post->id}}/edit" class="btn btn-warning"> Edit </a> </td>
                                     <td> 
-                                        <form method="POST" action=" {{ route('posts.destroy', $post->id)}}">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
-                                    </td>
-                                
-                                </tr>
+                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">Delete </button>
+
+                                    </form>
+                              </tr>
                             @endforeach
                         </tbody>
                     </table>
+
+                    Total # of Post  {{ $count }}
                 </div>
             </div>
         </div>
